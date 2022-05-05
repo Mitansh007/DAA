@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class course
+{
+    public:
+    int st, ft;
+};
+
+class plan
+{
+    public:
+    int sp, fp;
+};
+
+bool comparison(course a, course b)
+{
+    return a.ft<b.ft;
+}
+
+int main()
+{
+    int N, Q;
+    cin>>N>>Q;
+    course a[N];
+    plan b[Q];
+    for(int i=0; i<N; i++)
+    {
+        cin>>a[i].st>>a[i].ft;
+    }
+    for(int j=0; j<Q; j++)
+    {
+        cin>>b[j].sp>>b[j].fp;
+    }
+    sort(a,a+N,comparison);
+    for(int i=0; i<Q; i++)
+    {
+        int k=0;
+        int count=0;
+        if(a[k].st>=b[i].sp)
+        {
+            count++;
+        }
+        for(int j=1; j<N; j++)
+        {
+            if(a[j].st>=a[k].ft && a[j].ft<=b[i].fp)
+                count++;
+                k=j;
+        }
+        cout<<count<<endl;
+    }
+}
